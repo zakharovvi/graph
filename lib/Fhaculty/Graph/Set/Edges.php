@@ -331,9 +331,10 @@ class Edges implements Countable, IteratorAggregate, EdgesAggregate
     {
         $edges = array();
         foreach ($this->edges as $edge) {
+            $edgeKey = $edge->getVertexStart()->getId().'-'.$edge->getVertexEnd()->getId();
             // filter duplicate edges
-            if (!in_array($edge, $edges, true)) {
-                $edges []= $edge;
+            if (!array_key_exists($edgeKey, $edges)) {
+                $edges[$edgeKey] = $edge;
             }
         }
 

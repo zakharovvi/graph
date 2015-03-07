@@ -46,6 +46,25 @@ class Graph implements DualAggregate, AttributeAware
         $this->edges = Edges::factoryArrayReference($this->edgesStorage);
     }
 
+    public function mergeGraph(Graph $graph)
+    {
+        foreach ($graph->getVertices() as $vertex) {
+            $this->addVertex($vertex);
+            $vertex->setGraph($this);
+        }
+        foreach ($graph->getEdges() as $edge) {
+            $this->addEdge($edge);
+        }
+    }
+
+    public function renameVertex($oldId, $newId)
+    {
+        $vertex = $this->vertices->getVertexId($oldId);
+        $vertex->setId($newId);
+        $this->verticesStorage[$newId] = $vertex;
+        unset($this->verticesStorage[$oldId]);
+    }
+
     /**
      * return set of Vertices added to this graph
      *

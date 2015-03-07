@@ -66,6 +66,22 @@ class Vertex implements EdgesAggregate, AttributeAware
     }
 
     /**
+     * @param Graph $graph
+     */
+    public function setGraph($graph)
+    {
+        $this->graph = $graph;
+    }
+
+    /**
+     * @param int|string $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    /**
      * get graph this vertex is attached to
      *
      * @return Graph
